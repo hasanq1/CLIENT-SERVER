@@ -45,7 +45,7 @@ void* pthread_funct( void* Request_pointer )
     
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) 
-        error("ERROR opening socket");
+        cerr<<"ERROR opening socket";
     server = gethostbyname(Request_ptr->hostname);
     if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
@@ -58,7 +58,7 @@ void* pthread_funct( void* Request_pointer )
          server->h_length);
     serv_addr.sin_port = htons(portno);
     if (connect(sockfd,(struct sockaddr *)&serv_addr,sizeof(serv_addr)) < 0) 
-        error("ERROR connecting");
+        cerr<<"ERROR connecting";
     // cout
     bzero(buffer,256);
 
@@ -69,7 +69,7 @@ void* pthread_funct( void* Request_pointer )
     bzero(buffer,256);
     n = read(sockfd,buffer,255);
     if (n < 0) 
-         error("ERROR reading from socket");
+         cerr<<"ERROR reading from socket";
     printf("%s\n",buffer);
     return NULL;
 }
